@@ -18,5 +18,4 @@ class consoleTabWidget(QWidget):
 
     #This is connected to signal from the stream
     def addMessage(self, message):
-        print("Message recieved")
         self.console.append(message)

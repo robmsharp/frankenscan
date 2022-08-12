@@ -11,7 +11,7 @@ from frankenscan.controller.statusSingleton import statusManager
 from frankenscan.view.Widgets.consoleTabWidget import consoleTabWidget
 from frankenscan.view.Widgets.modulesTabWidget import modulesTabWidget
 
-WINDOWWIDTH = 1600
+WINDOWWIDTH = 1200
 WINDOWHEIGHT = 800
 
 # This is the main window
@@ -35,11 +35,15 @@ class MainWindow(QMainWindow):
         #Connect the console to a stream
         myStream = MyStream()
         myStream.message.connect(console.addMessage)
+        sys.stdout = myStream
+
+        #Create the controller
 
         myTabs.addTab(console, "console")
         myTabs.addTab(moduleTabs, "moduleTabs")
 
         layout.addWidget(myTabs)
+
 
         self.setCentralWidget(container)
         self.resize(WINDOWWIDTH, WINDOWHEIGHT)

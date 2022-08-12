@@ -54,7 +54,7 @@ class modulesTabWidget(QWidget):
             #Get the modules and add them to the tab
             relevantModules = dataManager().getModulesForCategory(category)
 
-            print(relevantModules)
+
 
             for module in relevantModules:
                 moduleWidgets[moduleIndex] = QListWidgetItem()

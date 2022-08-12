@@ -4,15 +4,13 @@ from PySide2.QtWidgets import QWidget, QVBoxLayout, QTabWidget, QListWidget, \
     QListWidgetItem, QPushButton, QHBoxLayout
 
 from frankenscan.controller.resourceSingleton import resourceManager
+from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.model.dataSingleton import dataManager
 from frankenscan.view.Widgets.myListWidget import myListWidget
 
 #Constants
-ICONLISTWIDTH = 1000
-SPACING = 10
 
-ITEMWIDTH = 150
-ITEMHEIGHT = 70
+
 
 class controlsTabWidget(QWidget):
 
@@ -28,6 +26,9 @@ class controlsTabWidget(QWidget):
     def __init__(self, parent = None):
 
         QWidget.__init__(self, parent)
+
+        #Get constants
+        ITEMWIDTH, ITEMHEIGHT = settingsManager().getControlConstants()
 
         #Get the control data
         controls, controllerCategories = dataManager().getControlData()

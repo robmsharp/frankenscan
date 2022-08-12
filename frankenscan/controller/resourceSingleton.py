@@ -5,6 +5,7 @@ from PySide2.QtGui import QIcon
 from frankenscan.controller.singleton import Singleton
 
 ICONS = "/icons/"
+SETTINGS = "/frankenscan/model/settings/settings.json"
 
 class resourceManager(Singleton):
 
@@ -21,3 +22,7 @@ class resourceManager(Singleton):
     #Returns a QIcon for a given name
     def getIcon(self, iconName):
         return QIcon(self.iconBasePath+iconName)
+
+    #Returns the settings file path
+    def getSettingsFilePath(self):
+        return os.path.abspath(".") + SETTINGS

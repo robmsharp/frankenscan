@@ -10,15 +10,11 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, \
 
 #Constants
 from frankenscan.controller.MyStream import MyStream
+from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.controller.statusSingleton import statusManager
 from frankenscan.view.Widgets.consoleTabWidget import consoleTabWidget
 from frankenscan.view.Widgets.controlsTabWidget import controlsTabWidget
 from frankenscan.view.Widgets.modulesTabWidget import modulesTabWidget
-
-WINDOWWIDTH = 1200
-WINDOWHEIGHT = 800
-
-CONSOLE = 0
 
 # This is the main window
 class MainWindow(QMainWindow):
@@ -55,7 +51,6 @@ class MainWindow(QMainWindow):
         #Get the session
         self.startSession()
 
-
         myTabs = QTabWidget()
 
         #Create the tabs for modules
@@ -63,8 +58,8 @@ class MainWindow(QMainWindow):
 
         #Create the console
         console = consoleTabWidget()
-        #Connect the console to a stream
-        if CONSOLE:
+        #Connect the console to a stream if setting is true
+        if settingsManager().getConsoleSetting():
             myStream = MyStream()
             myStream.message.connect(console.addMessage)
             sys.stdout = myStream
@@ -82,7 +77,7 @@ class MainWindow(QMainWindow):
         layout.addWidget(myTabs)
 
         self.setCentralWidget(container)
-        self.resize(WINDOWWIDTH, WINDOWHEIGHT)
+        self.resize(settingsManager().getMainWindowSize())
 
         #Create a status Manager singleton and assign the status bar to it
         self.statusManager = statusManager()

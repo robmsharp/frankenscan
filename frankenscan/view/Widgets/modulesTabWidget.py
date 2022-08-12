@@ -4,15 +4,9 @@ from PySide2.QtWidgets import QWidget, QVBoxLayout, QTabWidget, QListWidget, \
     QListWidgetItem
 
 from frankenscan.controller.resourceSingleton import resourceManager
+from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.model.dataSingleton import dataManager
 from frankenscan.view.Widgets.myListWidget import myListWidget
-
-#Constants
-ICONLISTWIDTH = 1000
-SPACING = 10
-
-ITEMWIDTH = 150
-ITEMHEIGHT = 70
 
 class modulesTabWidget(QWidget):
 
@@ -20,6 +14,8 @@ class modulesTabWidget(QWidget):
 
         QWidget.__init__(self, parent)
 
+        #Get constants
+        ICONLISTWIDTH, SPACING, ITEMWIDTH, ITEMHEIGHT = settingsManager().getModuleConstants()
 
         #Get the module data
         modules, moduleCategories = dataManager().getModuleData()
@@ -70,3 +66,5 @@ class modulesTabWidget(QWidget):
                 iconListWidgets[i].insertItem(-1, moduleWidgets[moduleIndex])
 
                 moduleIndex+=1
+
+

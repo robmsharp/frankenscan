@@ -1,0 +1,23 @@
+{
+  "MainWindow":
+    {
+      "width": 1200,
+      "height": 800},
+
+  "Console":
+    {
+      "capturePrintStatements": false
+    },
+  "Controls":
+  {
+    "itemWidth": 150,
+    "itemHeight": 70
+  },
+  "Modules":
+  {
+    "iconListWidth": 1000,
+    "spacing": 10,
+    "itemWidth": 150,
+    "itemHeight": 70
+  }
+}

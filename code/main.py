@@ -32,7 +32,8 @@ class MainWindow(QMainWindow):
         relevantModules = []
 
         for module in modules:
-            if module["Name"] == category:
+
+            if module["Category"] == category:
                 relevantModules.append(module)
         return relevantModules
 
@@ -64,10 +65,12 @@ class MainWindow(QMainWindow):
             #Get the modules and add them to the tab
             relevantModules = self.getModulesForCategory(category, modules)
 
+            print(relevantModules)
+
             for module in relevantModules:
                 moduleWidgets[moduleIndex] = QListWidgetItem()
                 moduleWidgets[moduleIndex].setText(module["Name"])
-                moduleWidgets[moduleIndex].setIcon(QIcon("/Users/robertsharp/Desktop/2022/projects/frankenscan/icons/abacus.png/"+module["Icon"]))
+                moduleWidgets[moduleIndex].setIcon(QIcon("/Users/robertsharp/Desktop/2022/projects/frankenscan/icons/"+module["Icon"]))
 
                 #Get the length of the name
                 fm = QFontMetrics(moduleWidgets[moduleIndex].font())
@@ -75,8 +78,9 @@ class MainWindow(QMainWindow):
 
                 #1.5 seems to work not sure why
                 moduleWidgets[moduleIndex].setSizeHint(QSize(width*1.5, ITEMHEIGHT))
-
                 iconListWidgets[i].insertItem(-1, moduleWidgets[moduleIndex])
+
+                moduleIndex+=1
 
         return tabs
 

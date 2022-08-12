@@ -1,5 +1,8 @@
 import sys
 
+import ryvencore_qt as rc
+
+
 from PySide2.QtCore import QMimeData, QSize
 from PySide2.QtGui import QIcon, QFontMetrics
 from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, \
@@ -20,6 +23,27 @@ CONSOLE = 0
 # This is the main window
 class MainWindow(QMainWindow):
 
+    def startSession(self):
+
+        self.session = rc.Session()
+
+        self.session.design.set_flow_theme(name='pure light')
+        self.session.design.set_performance_mode('pretty')
+
+        # registering the nodes
+        """self.session.register_nodes(
+            self.getClassList(self.nodeList)
+        )"""
+
+        self.script = self.session.create_script(title='main')
+
+        self.session.flow_views[self.script]._stylus_modes_widget.hide()
+
+        self.view = self.session.flow_views[self.script]
+
+        self.view.installEventFilter(self)
+        self.view.viewport().installEventFilter(self)
+
     def __init__(self):
 
         super().__init__()
@@ -27,6 +51,10 @@ class MainWindow(QMainWindow):
         container = QWidget()
 
         layout = QVBoxLayout(container)
+
+        #Get the session
+        self.startSession()
+
 
         myTabs = QTabWidget()
 
@@ -47,6 +75,9 @@ class MainWindow(QMainWindow):
         myTabs.addTab(console, "console")
         myTabs.addTab(controlTabs, "controls")
         myTabs.addTab(moduleTabs, "moduleTabs")
+
+        #Add the ryvencore window
+        layout.addWidget(self.view)
 
         layout.addWidget(myTabs)
 

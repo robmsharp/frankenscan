@@ -6,6 +6,8 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, \
     QVBoxLayout, QTabWidget, QListWidget, QListWidgetItem
 
 #Constants
+from frankenscan.controller.statusSingleton import statusManager
+
 WINDOWWIDTH = 1600
 WINDOWHEIGHT = 800
 
@@ -120,17 +122,19 @@ class MainWindow(QMainWindow):
         #Validate the module data
         self.validateModuleData(modules, moduleCategories)
 
-        label = QLabel("Hello world")
-
         #Create the tabs for modules
         tabs = self.getModuleTabs(modules, moduleCategories)
 
         layout = QVBoxLayout(container)
-        layout.addWidget(label)
         layout.addWidget(tabs)
 
         self.setCentralWidget(container)
         self.resize(WINDOWWIDTH, WINDOWHEIGHT)
+
+        #Create a status Manager singleton and assign the status bar to it
+        self.statusManager = statusManager()
+        self.statusManager.setStatusBar(self.statusBar())
+        self.statusManager.updateStatus("Frankenscan loaded")
 
 # This launches the main window
 if __name__ == '__main__':

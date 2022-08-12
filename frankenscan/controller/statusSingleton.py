@@ -4,6 +4,10 @@ from frankenscan.controller.singleton import Singleton
 class statusManager(Singleton):
 
     def updateStatus(self, message):
+        #print the message to console
+        print(message)
+
+        #Update the status bar
         self.statusBar.showMessage(message)
 
     def setStatusBar(self, statusBar):

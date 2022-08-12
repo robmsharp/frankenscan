@@ -3,6 +3,7 @@ from PySide2.QtGui import QFontMetrics, QIcon
 from PySide2.QtWidgets import QWidget, QVBoxLayout, QTabWidget, QListWidget, \
     QListWidgetItem
 
+from frankenscan.controller.resourceSingleton import resourceManager
 from frankenscan.model.dataSingleton import dataManager
 from frankenscan.view.Widgets.myListWidget import myListWidget
 
@@ -58,7 +59,7 @@ class modulesTabWidget(QWidget):
             for module in relevantModules:
                 moduleWidgets[moduleIndex] = QListWidgetItem()
                 moduleWidgets[moduleIndex].setText(module["Name"])
-                moduleWidgets[moduleIndex].setIcon(QIcon("/Users/robertsharp/Desktop/2022/projects/frankenscan/icons/"+module["Icon"]))
+                moduleWidgets[moduleIndex].setIcon(resourceManager().getIcon(module["Icon"]))
 
                 #Get the length of the name
                 fm = QFontMetrics(moduleWidgets[moduleIndex].font())

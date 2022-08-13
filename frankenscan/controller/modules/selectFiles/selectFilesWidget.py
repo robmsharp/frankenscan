@@ -27,7 +27,7 @@ class SelectFilesWidget(MWB, QWidget):
 
         #Button to select files
         button = QPushButton('Select Files')
-        button.clicked.connect(self.openFiles)
+        button.clicked.connect(self.selectFiles)
 
         layout.addWidget(self.label)
         layout.addWidget(self.list)
@@ -36,7 +36,7 @@ class SelectFilesWidget(MWB, QWidget):
         self.widget = container
         self.widget.setMinimumSize(300,400)
 
-    def openFiles(self):
+    def selectFiles(self):
 
         dialog = QFileDialog()
         dialog.setWindowTitle("Choose files to open")
@@ -54,6 +54,7 @@ class SelectFilesWidget(MWB, QWidget):
                 self.list.addItem(file)
                 numberOfFiles = numberOfFiles + 1
             self.filesSelectedSignal.emit(files)
+            print(files)
             self.label.setText(str(numberOfFiles) + ' files selected')
         else:
             #Do nothing if dialog cancelled

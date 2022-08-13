@@ -56,14 +56,21 @@ class dataManager(Singleton):
 
         return self.controls, self.controllerCategories
 
+    #Return a list of classes
+    def getClasses(self):
+        classes = []
+        for module in self.modules:
+            classes.append(module["Name"])
+        return classes
+
     def init(self):
         ##print("This is only executed when calling the singleton first time")
         ##print("calling init")
 
         #Data for module
         self.moduleCategories = ["File", "View", "Machine Learning"]
-        self.modules = [{"Name":"Open File(s)", "Icon":"abacus.png", "Category": "File"},
-                   {"Name":"Split Training Data", "Icon":"abacus.png", "Category": "Machine Learning"}
+        self.modules = [{"Name":"Open_Files", "Icon":"abacus.png", "Category": "File"},
+                   {"Name":"Split_Data", "Icon":"abacus.png", "Category": "Machine Learning"}
                    ]
 
         #Alphabetically sort the modules

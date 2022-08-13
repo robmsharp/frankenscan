@@ -1,35 +1,73 @@
 import sys
 
 import ryvencore_qt as rc
+from PySide2 import QtCore
 
-
-from PySide2.QtCore import QMimeData, QSize
-from PySide2.QtGui import QIcon, QFontMetrics
+from PySide2.QtCore import QMimeData, QSize, QPointF
+from PySide2.QtGui import QIcon, QFontMetrics, QFontDatabase
 from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, \
     QVBoxLayout, QTabWidget, QListWidget, QListWidgetItem
 
-#Constants
 from frankenscan.controller.MyStream import MyStream
 from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.controller.statusSingleton import statusManager
+from frankenscan.model.dataSingleton import dataManager
 from frankenscan.view.Widgets.consoleTabWidget import consoleTabWidget
 from frankenscan.view.Widgets.controlsTabWidget import controlsTabWidget
 from frankenscan.view.Widgets.modulesTabWidget import modulesTabWidget
 
+#Import the node classes
+from frankenscan.controller.modules.modules import *
+
+CLASSLOCATION = "frankenscan.controller.modules.modules."
+
 # This is the main window
 class MainWindow(QMainWindow):
+
+    #Source: https://stackoverflow.com/questions/452969/does-python-have-an-equivalent-to-java-class-forname
+    def getClass( self, kls ):
+
+        parts = kls.split('.')
+        module = ".".join(parts[:-1])
+        m = __import__( module )
+        for comp in parts[1:]:
+            m = getattr(m, comp)
+        return m
+
+    def getClassList(self, list):
+        classList = []
+        for item in list:
+            classList.append(self.getClass(CLASSLOCATION+item))
+        return classList
+
+    #Creates node when you drag module onto the view
+    def eventFilter(self, object, event):
+
+        if (object is self.view.viewport()):
+
+            if (event.type() == QtCore.QEvent.Drop):
+
+                mappedPos = self.view.mapToScene(event.pos())
+                x = mappedPos.x()
+                y = mappedPos.y()
+                self.view._node_place_pos = QPointF(x,y)
+                print(event.mimeData().text())
+                string = CLASSLOCATION+event.mimeData().text()
+                self.view.flow.create_node(self.getClass(string))
+
+        return False
 
     def startSession(self):
 
         self.session = rc.Session()
 
         self.session.design.set_flow_theme(name='pure light')
-        self.session.design.set_performance_mode('pretty')
+        #self.session.design.set_performance_mode('pretty')
 
-        # registering the nodes
-        """self.session.register_nodes(
-            self.getClassList(self.nodeList)
-        )"""
+        # registering the modules as nodes
+        self.session.register_nodes(
+            self.getClassList(dataManager().getClasses())
+        )
 
         self.script = self.session.create_script(title='main')
 

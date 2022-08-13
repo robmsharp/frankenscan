@@ -8,7 +8,10 @@ import ryvencore_qt as rc
 from frankenscan.controller.settingsSingleton import settingsManager
 
 
-class OpenFilesWidget(MWB, QWidget):
+class SelectFilesWidget(MWB, QWidget):
+
+    #Used to signal changes to node
+    filesSelectedSignal = Signal(object)
 
     def __init__(self, params):
         MWB.__init__(self, params)
@@ -34,9 +37,6 @@ class OpenFilesWidget(MWB, QWidget):
         self.widget.setMinimumSize(300,400)
 
     def openFiles(self):
-
-        #Used to signal changes to node
-        filesSelectedSignal = Signal(object)
 
         dialog = QFileDialog()
         dialog.setWindowTitle("Choose files to open")

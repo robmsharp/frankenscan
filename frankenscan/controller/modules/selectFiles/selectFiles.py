@@ -2,19 +2,19 @@ from PySide2.QtWidgets import QWidget, QTextEdit
 from ryvencore_qt import MWB
 import ryvencore_qt as rc
 
-from frankenscan.controller.modules.openFiles.openFilesWidget import OpenFilesWidget
+from frankenscan.controller.modules.selectFiles.selectFilesWidget import SelectFilesWidget
 
-class Open_Files(rc.Node):
-    """Outputs files selected by user"""
+class Select_nii_Files(rc.Node):
+    """Selects NIFTI (.nii) files specified by user"""
 
-    title = 'Opens files'
+    title = 'Select NIFTI (.nii) files'
 
     init_outputs = [
-        rc.NodeInputBP('output', type_='data')
+        rc.NodeOutputBP('Selected .nii files', type_='data')
     ]
     color = '#000000'
 
-    main_widget_class = OpenFilesWidget
+    main_widget_class = SelectFilesWidget
     main_widget_pos = 'between ports'
 
     def __init__(self, params):

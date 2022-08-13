@@ -8,8 +8,8 @@ class View_Header(rc.Node):
     init_inputs = [
         rc.NodeInputBP('Headers', type_='data')
     ]
-    color = '#000000'
 
+    color = '#000000'
 
     main_widget_pos = 'between ports'
 

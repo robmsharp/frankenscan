@@ -69,8 +69,10 @@ class dataManager(Singleton):
 
         #Data for module
         self.moduleCategories = ["File", "View", "Machine Learning"]
-        self.modules = [{"Name":"Open_Files", "Icon":"abacus.png", "Category": "File"},
-                   {"Name":"Split_Data", "Icon":"abacus.png", "Category": "Machine Learning"}
+        self.modules = [{"Name":"Select_nii_Files", "Icon":"abacus.png", "Category": "File"},
+                   {"Name":"Read_nii_Files", "Icon":"abacus.png", "Category": "File"},
+                    {"Name":"View_Header", "Icon":"abacus.png", "Category": "View"},
+                    {"Name":"View_Numpy_Array", "Icon":"abacus.png", "Category": "View"}
                    ]
 
         #Alphabetically sort the modules

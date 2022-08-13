@@ -2,24 +2,12 @@ from PySide2.QtWidgets import QWidget, QTextEdit
 from ryvencore_qt import MWB
 import ryvencore_qt as rc
 
-from frankenscan.controller.modules.openFiles.openFiles import Open_Files
+from frankenscan.controller.modules.openFiles.openFilesWidget import OpenFilesWidget
 
-class OpenFilesWidget(MWB, QWidget):
+class Open_Files(rc.Node):
+    """Outputs files selected by user"""
 
-    def __init__(self, params):
-        MWB.__init__(self, params)
-        QWidget.__init__(self)
-        self.widget = QTextEdit(self)
-        self.widget.setMinimumSize(300,400)
-
-    def getCode(self):
-        return(self.widget.toPlainText())
-
-
-class Split_Data(rc.Node):
-    """Splits data into training and test data"""
-
-    title = 'Split data'
+    title = 'Opens files'
 
     init_inputs = [
         rc.NodeInputBP('data', type_='data')

@@ -9,6 +9,7 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, \
     QVBoxLayout, QTabWidget, QListWidget, QListWidgetItem
 
 from frankenscan.controller.MyStream import MyStream
+from frankenscan.controller.sessionSingleton import sessionManager
 from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.controller.statusSingleton import statusManager
 from frankenscan.model.dataSingleton import dataManager
@@ -51,7 +52,7 @@ class MainWindow(QMainWindow):
                 x = mappedPos.x()
                 y = mappedPos.y()
                 self.view._node_place_pos = QPointF(x,y)
-                print(event.mimeData().text())
+                print(event.mimeData().text()+" module added to session.")
                 string = CLASSLOCATION+event.mimeData().text()
                 self.view.flow.create_node(self.getClass(string))
 
@@ -77,6 +78,8 @@ class MainWindow(QMainWindow):
 
         self.view.installEventFilter(self)
         self.view.viewport().installEventFilter(self)
+
+        sessionManager().registerSession(self.session, self.script)
 
     def __init__(self):
 

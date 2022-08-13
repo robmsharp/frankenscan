@@ -4,24 +4,21 @@ from PySide2.QtWidgets import QWidget, QVBoxLayout, QTabWidget, QListWidget, \
     QListWidgetItem, QPushButton, QHBoxLayout
 
 from frankenscan.controller.resourceSingleton import resourceManager
+from frankenscan.controller.sessionSingleton import sessionManager
 from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.model.dataSingleton import dataManager
 from frankenscan.view.Widgets.myListWidget import myListWidget
 
-#Constants
-
-
-
 class controlsTabWidget(QWidget):
 
     def myRun(self):
-        print("Running!")
+        sessionManager().run()
 
     def myReset(self):
-        print("Reset!")
+        sessionManager().reset()
 
     def myPause(self):
-        print("Paused!")
+        sessionManager().pause()
 
     def __init__(self, parent = None):
 

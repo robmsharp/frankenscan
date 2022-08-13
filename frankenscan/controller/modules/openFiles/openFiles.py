@@ -9,9 +9,6 @@ class Open_Files(rc.Node):
 
     title = 'Opens files'
 
-    init_inputs = [
-        rc.NodeInputBP('data', type_='data')
-    ]
     init_outputs = [
         rc.NodeInputBP('output', type_='data')
     ]

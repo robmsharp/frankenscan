@@ -11,6 +11,12 @@ ICONS = "/icons/"
 
 class settingsManager(Singleton):
 
+    #Returns latest opened folder
+    #TODO: implement this loading from settings file and updating on opening
+    #new folder locations
+    def getLatestFolder(self):
+        return "/Users/robertsharp/Desktop/2022/scanData/Task04_Hippocampus/imagesTr/"
+
     #Returns a dictionary containing the settings data
     def readConfigFromFile(self):
 

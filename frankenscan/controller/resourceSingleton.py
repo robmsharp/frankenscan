@@ -4,7 +4,7 @@ from PySide2.QtGui import QIcon
 
 from frankenscan.controller.singleton import Singleton
 
-ICONS = "/icons/"
+ICONS = "/frankenscan/model/assets/icons/"
 SETTINGS = "/frankenscan/model/settings/settings.json"
 
 class resourceManager(Singleton):

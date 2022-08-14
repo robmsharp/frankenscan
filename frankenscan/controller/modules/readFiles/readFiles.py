@@ -24,10 +24,9 @@ class Read_nii_Files(rc.Node):
         self.hasRun = False
 
     def update_event(self, inp=-1):
-        print("Updating read files node")
+        print("Inspecting read files node")
         if self.hasRun == False and self.input(0)!=None:
-
-            print("Attempting to read files")
+            print("Executing read files node")
 
             #Read the files
             headers = []
@@ -54,6 +53,7 @@ class Read_nii_Files(rc.Node):
                 arrays.append(array)
                 headers.append(header)
 
+            print("Updating read files node outputs")
             self.set_output_val(1, arrays)
             self.set_output_val(0, headers)
             self.hasRun = True

@@ -1,5 +1,9 @@
 import ryvencore_qt as rc
 
+from frankenscan.controller.modules.viewFiles.headerViewer import HeaderViewer
+from frankenscan.controller.modules.viewFiles.arrayViewer import ArrayViewer
+
+
 class View_Header(rc.Node):
     """Views header information"""
 
@@ -18,7 +22,10 @@ class View_Header(rc.Node):
         self.hasRun = False
 
     def update_event(self, inp=-1):
-        if self.hasRun == False:
+        if self.hasRun == False and self.input(0)!=None:
+            data = self.input(0)
+            print("Viewing header")
+            HeaderViewer(self, data)
             self.run = True
 
 class View_Numpy_Array(rc.Node):
@@ -39,5 +46,7 @@ class View_Numpy_Array(rc.Node):
         self.hasRun = False
 
     def update_event(self, inp=-1):
-        if self.hasRun == False:
+        if self.hasRun == False and self.input(0)!=None:
+            data = self.input(0)
+            ArrayViewer(self, data)
             self.run = True

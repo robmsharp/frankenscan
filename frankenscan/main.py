@@ -8,7 +8,7 @@ from PySide2.QtGui import QIcon, QFontMetrics, QFontDatabase
 from PySide2.QtWidgets import QApplication, QMainWindow, QWidget, QLabel, \
     QVBoxLayout, QTabWidget, QListWidget, QListWidgetItem
 
-from frankenscan.controller.MyStream import MyStream
+from frankenscan.controller.myStream import MyStream
 from frankenscan.controller.sessionSingleton import sessionManager
 from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.controller.statusSingleton import statusManager

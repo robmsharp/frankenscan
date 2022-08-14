@@ -54,7 +54,6 @@ class SelectFilesWidget(MWB, QWidget):
                 self.list.addItem(file)
                 numberOfFiles = numberOfFiles + 1
             self.filesSelectedSignal.emit(files)
-            print(files)
             self.label.setText(str(numberOfFiles) + ' files selected')
         else:
             #Do nothing if dialog cancelled

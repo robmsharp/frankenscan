@@ -6,7 +6,7 @@ from frankenscan.controller.modules.selectFiles.selectFilesWidget import SelectF
 class Read_nii_Files(rc.Node):
     """Reads NIFTI (.nii) files into headers and numpy arrays"""
 
-    title = 'Reads NIFTI (.nii) files'
+    title = 'Read NIFTI (.nii) files'
 
     init_inputs = [
         rc.NodeInputBP('Selected .nii files', type_='data')
@@ -24,9 +24,9 @@ class Read_nii_Files(rc.Node):
         self.hasRun = False
 
     def update_event(self, inp=-1):
-        print("Inspecting read files node")
+
         if self.hasRun == False and self.input(0)!=None:
-            print("Executing read files node")
+            print("Reading selected .nii files")
 
             #Read the files
             headers = []

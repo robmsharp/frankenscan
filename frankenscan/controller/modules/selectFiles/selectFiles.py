@@ -23,7 +23,7 @@ class Select_nii_Files(rc.Node):
         self.update()
 
     def registerSelection(self, files):
-        print("Signal recieved")
+
         self.filesSelected = files
         self.update()
 
@@ -33,7 +33,6 @@ class Select_nii_Files(rc.Node):
         self.filesSelected = None
 
     def update_event(self, inp=-1):
-        print("Inspecting select .nii node")
 
         #Only update if selected files is not none
         if self.hasRun == False and self.filesSelected != None:

@@ -24,7 +24,7 @@ class View_Header(rc.Node):
     def update_event(self, inp=-1):
         if self.hasRun == False and self.input(0)!=None:
             data = self.input(0)
-            print("Viewing header")
+            print("Viewing headers")
             HeaderViewer(self, data)
             self.run = True
 
@@ -47,6 +47,7 @@ class View_Numpy_Array(rc.Node):
 
     def update_event(self, inp=-1):
         if self.hasRun == False and self.input(0)!=None:
+            print("Viewing numpy arrays")
             data = self.input(0)
             ArrayViewer(self, data)
             self.run = True

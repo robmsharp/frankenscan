@@ -22,6 +22,7 @@ class settingsManager(Singleton):
     def readConfigFromFile(self):
 
         fp = resourceManager().getSettingsFilePath()
+        #fp = "C:/Users/Robert/IdeaProjects/frankenscan/frankenscan/model/settings/settings.json".replace('/','\\')
 
         try:
             with open(fp, "r") as f:

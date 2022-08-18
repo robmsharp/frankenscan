@@ -16,7 +16,8 @@ class settingsManager(Singleton):
     #new folder locations
     def getLatestFolder(self):
         #return "/Users/robertsharp/Desktop/2022/scanData/Task04_Hippocampus/imagesTr/"
-        return os.path.abspath(".")
+        return "C:/Users/Robert/IdeaProjects/frankenscan/data"
+        #return os.path.abspath(".")
 
     #Returns a dictionary containing the settings data
     def readConfigFromFile(self):

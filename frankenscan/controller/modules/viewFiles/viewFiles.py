@@ -2,7 +2,29 @@ import ryvencore_qt as rc
 
 from frankenscan.controller.modules.viewFiles.headerViewer import HeaderViewer
 from frankenscan.controller.modules.viewFiles.arrayViewer import ArrayViewer
+from frankenscan.controller.modules.viewFiles.imageViewer import ImageViewer
 
+
+class View_Image(rc.Node):
+    """Views images"""
+
+    title = 'View Image'
+
+    init_inputs = [
+        rc.NodeInputBP('Images', type_='data')
+    ]
+    color = '#000000'
+
+    def __init__(self, params):
+        super().__init__(params)
+        self.hasRun = False
+
+    def update_event(self, inp=-1):
+        if self.hasRun == False and self.input(0)!=None:
+            print("Viewing images")
+            data = self.input(0)
+            ImageViewer(self, data)
+            self.run = True
 
 class View_Header(rc.Node):
     """Views header information"""
@@ -14,8 +36,6 @@ class View_Header(rc.Node):
     ]
 
     color = '#000000'
-
-    main_widget_pos = 'between ports'
 
     def __init__(self, params):
         super().__init__(params)
@@ -37,9 +57,6 @@ class View_Numpy_Array(rc.Node):
         rc.NodeInputBP('Numpy Arrays', type_='data')
     ]
     color = '#000000'
-
-
-    main_widget_pos = 'between ports'
 
     def __init__(self, params):
         super().__init__(params)

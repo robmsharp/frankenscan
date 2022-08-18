@@ -73,6 +73,7 @@ class dataManager(Singleton):
                         {"Name":"Select_Image_Files", "Icon":"script--plus.png", "Category": "File"},
                    {"Name":"Read_nii_Files", "Icon":"scanner--arrow.png", "Category": "File"},
                     {"Name":"View_Header", "Icon":"receipt-sticky-note.png", "Category": "View"},
+                    {"Name":"View_Image", "Icon":"receipt-sticky-note.png", "Category": "View"},
                     {"Name":"View_Numpy_Array", "Icon":"slide-resize-actual.png", "Category": "View"}
                    ]
 

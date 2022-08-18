@@ -19,5 +19,10 @@
     "spacing": 10,
     "itemWidth": 150,
     "itemHeight": 70
+  },
+  "LastFilePath":
+  {
+    "useLastFilePath": false,
+    "lastFilePath": "C:/Users/Robert/IdeaProjects/frankenscan/data"
   }
 }

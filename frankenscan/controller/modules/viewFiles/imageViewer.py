@@ -12,8 +12,7 @@ class MplCanvas(FigureCanvasQTAgg):
     def __init__(self, parent=None, width=5, height=4, dpi=100, image=None):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
-        readImage = plt.imread(image)
-        self.axes.imshow(readImage)
+        self.axes.imshow(image)
         super(MplCanvas, self).__init__(fig)
 
 class ImageViewer(QMainWindow):

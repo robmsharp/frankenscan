@@ -15,7 +15,7 @@ While the concept behind FrankenScan is based on ScanFlow (University of Melbour
 Dependencies:
 
 Ryvencore (https://github.com/leon-thomm/ryvencore-qt),
-Pyside2, pyvistaqt, matplotlib
+Pyside2, pyvistaqt, matplotlib, torch, numpy
 
 This project uses the Fugue Icon set as placeholder icons.
 

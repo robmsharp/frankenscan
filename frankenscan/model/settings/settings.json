@@ -33,7 +33,9 @@
   {"Name":"View_Header", "Icon":"receipt-sticky-note.png", "Category": "View"},
   {"Name":"View_Image", "Icon":"receipt-sticky-note.png", "Category": "View"},
   {"Name":"View_Numpy_Array", "Icon":"slide-resize-actual.png", "Category": "View"},
-  {"Name":"Normalise_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"}
+  {"Name":"Normalise_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"},
+      {"Name":"Data_Loader", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
+      {"Name":"View_Data_Loader", "Icon":"scanner--arrow.png", "Category": "View"}
     ]
 
   },

@@ -1,9 +1,33 @@
 import ryvencore_qt as rc
 
+from frankenscan.controller.modules.viewFiles.dataLoaderViewer import DataLoaderViewer
 from frankenscan.controller.modules.viewFiles.headerViewer import HeaderViewer
 from frankenscan.controller.modules.viewFiles.arrayViewer import ArrayViewer
 from frankenscan.controller.modules.viewFiles.imageViewer import ImageViewer
 
+class View_Data_Loader(rc.Node):
+    """Views labelled MRI images"""
+
+    title = 'View Data Loader'
+
+    init_inputs = [
+        rc.NodeInputBP('Data loader', type_='data')
+    ]
+    color = '#000000'
+
+    def __init__(self, params):
+        super().__init__(params)
+        self.hasRun = False
+
+    def update_event(self, inp=-1):
+        if self.hasRun == False and self.input(0)!=None:
+            print("Viewing dataLoader")
+            data = self.input(0)
+            try:
+                DataLoaderViewer(self, data)
+            except Exception as e:
+                print(e)
+            self.run = True
 
 class View_Image(rc.Node):
     """Views images"""

@@ -76,7 +76,9 @@ class dataManager(Singleton):
                         {"Name":"Rescale_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"},
                     {"Name":"View_Header", "Icon":"receipt-sticky-note.png", "Category": "View"},
                     {"Name":"View_Image", "Icon":"receipt-sticky-note.png", "Category": "View"},
-                    {"Name":"View_Numpy_Array", "Icon":"slide-resize-actual.png", "Category": "View"}
+                    {"Name":"View_Numpy_Array", "Icon":"slide-resize-actual.png", "Category": "View"},
+                        {"Name":"Normalise_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"}
+
                    ]
 
         #Alphabetically sort the modules

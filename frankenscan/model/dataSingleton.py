@@ -1,3 +1,4 @@
+from frankenscan.controller.settingsSingleton import settingsManager
 from frankenscan.controller.singleton import Singleton
 
 
@@ -68,18 +69,8 @@ class dataManager(Singleton):
         ##print("calling init")
 
         #Data for module
-        self.moduleCategories = ["File", "View", "Machine Learning"]
-        self.modules = [{"Name":"Select_nii_Files", "Icon":"script--plus.png", "Category": "File"},
-                        {"Name":"Select_Image_Files", "Icon":"script--plus.png", "Category": "File"},
-                   {"Name":"Read_nii_Files", "Icon":"scanner--arrow.png", "Category": "File"},
-                    {"Name":"Read_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"},
-                        {"Name":"Rescale_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"},
-                    {"Name":"View_Header", "Icon":"receipt-sticky-note.png", "Category": "View"},
-                    {"Name":"View_Image", "Icon":"receipt-sticky-note.png", "Category": "View"},
-                    {"Name":"View_Numpy_Array", "Icon":"slide-resize-actual.png", "Category": "View"},
-                        {"Name":"Normalise_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"}
-
-                   ]
+        self.moduleCategories = settingsManager().getModulesTabs()
+        self.modules = settingsManager().getModules()
 
         #Alphabetically sort the modules
         self.modules = sorted(self.modules, key= lambda dictionary: dictionary["Name"])
@@ -88,11 +79,8 @@ class dataManager(Singleton):
         self.validateModuleData(self.modules, self.moduleCategories)
 
         #Data for controller
-        self.controllerCategories = ["Run", "File", "Edit"]
-        self.controls = [{"Name":"Run", "Icon":"metronome--arrow.png", "Category": "Run", "Program":"myRun"},
-                        {"Name":"Pause", "Icon":"control-pause.png", "Category": "Run", "Program":"myPause"},
-                         {"Name":"Reset", "Icon":"arrow-circle-135.png", "Category": "Run", "Program":"myReset"}
-                        ]
+        self.controllerCategories = settingsManager().getControlsTabs()
+        self.controls = settingsManager().getControlsButtons()
 
         #Validate the controller data
         self.validateControllerData(self.controls, self.controllerCategories)

@@ -63,3 +63,15 @@ class settingsManager(Singleton):
     #Return the control button constants
     def getControlConstants(self):
         return self.settings["Controls"]["itemWidth"], self.settings["Controls"]["itemHeight"]
+
+    def getModules(self):
+        return self.settings["Modules"]["modules"]
+
+    def getControlsButtons(self):
+        return self.settings["Controls"]["buttons"]
+
+    def getControlsTabs(self):
+        return self.settings["Controls"]["tabs"]
+
+    def getModulesTabs(self):
+        return self.settings["Modules"]["tabs"]

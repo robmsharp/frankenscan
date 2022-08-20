@@ -1,3 +1,5 @@
+import glob
+
 import SimpleITK as sitk
 import cv2
 import ryvencore_qt as rc
@@ -43,6 +45,58 @@ class MRI(Dataset):
         sample = {'image': self.images[index], 'label':self.labels[index]}
 
         return sample
+
+#TODO: remove this
+#Note uses hard coded files to save time
+#Will not work on other computers
+class Dummy_Data_Loader(rc.Node):
+    """Loads data and creates labels"""
+
+    title = 'Loads data and creates labels'
+
+    init_outputs = [
+        rc.NodeOutputBP('Data loader', type_='data')
+    ]
+
+    color = '#000000'
+
+    def __init__(self, params):
+        super().__init__(params)
+        self.hasRun = False
+
+    def update_event(self, inp=-1):
+
+        if self.hasRun == False:
+
+            healthy = []
+
+            tumor = []
+
+            #Source: https://github.com/MLDawn/MLDawn-Projects/blob/main/Pytorch/Brain-Tumor-Detector/MRI-Brain-Tumor-Detecor.ipynb
+            for f in glob.iglob("C:/Users/Robert/IdeaProjects/frankenscan/data/yes/*.jpg"):
+                img = cv2.imread(f)
+                img = cv2.resize(img,(128,128))
+                b, g, r = cv2.split(img)
+                img = cv2.merge([r,g,b])
+                img = img/255.0
+                tumor.append(img)
+
+            for f in glob.iglob("C:/Users/Robert/IdeaProjects/frankenscan/data/no/*.jpg"):
+                img = cv2.imread(f)
+                img = cv2.resize(img,(128,128))
+                b, g, r = cv2.split(img)
+                img = cv2.merge([r,g,b])
+                img = img/255.0
+                healthy.append(img)
+
+            print("Creating dummy data loader")
+
+            dataLoader = MRI(healthy, tumor)
+
+            print("Updating data loader node outputs")
+            self.set_output_val(0, dataLoader)
+            self.hasRun = True
+
 
 class Data_Loader(rc.Node):
     """Loads data and creates labels"""

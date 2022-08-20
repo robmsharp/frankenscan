@@ -110,7 +110,7 @@ class MainWindow(QMainWindow):
 
         myTabs.addTab(console, "console")
         myTabs.addTab(controlTabs, "controls")
-        myTabs.addTab(moduleTabs, "moduleTabs")
+        myTabs.addTab(moduleTabs, "modules")
 
         #Add the ryvencore window
         layout.addWidget(self.view)

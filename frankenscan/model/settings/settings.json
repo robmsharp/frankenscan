@@ -24,7 +24,7 @@
     "spacing": 10,
     "itemWidth": 150,
     "itemHeight": 70,
-    "tabs": ["File", "View", "Machine Learning"],
+    "tabs": ["File", "View", "Machine Learning", "Values"],
     "modules": [{"Name":"Select_nii_Files", "Icon":"script--plus.png", "Category": "File"},
   {"Name":"Select_Image_Files", "Icon":"script--plus.png", "Category": "File"},
   {"Name":"Read_nii_Files", "Icon":"scanner--arrow.png", "Category": "File"},
@@ -36,7 +36,8 @@
   {"Name":"Normalise_Image_Files", "Icon":"scanner--arrow.png", "Category": "File"},
       {"Name":"Data_Loader", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
       {"Name":"View_Data_Loader", "Icon":"scanner--arrow.png", "Category": "View"},
-      {"Name":"Dummy_Data_Loader", "Icon":"scanner--arrow.png", "Category": "Machine Learning"}
+      {"Name":"Dummy_Data_Loader", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
+      {"Name":"Create_Int", "Icon":"scanner--arrow.png", "Category": "Values"}
 
     ]
 

@@ -12,10 +12,6 @@ class SelectFilesWidget(MWB, QWidget):
     #Used to signal changes to node
     filesSelectedSignal = Signal(object)
 
-    #Takes a list of strings to filter file types
-    def setFileTypeList(self, typeStringList):
-        self.typeString = typeStringList
-
     def __init__(self, params):
         MWB.__init__(self, params)
         QWidget.__init__(self)
@@ -51,7 +47,6 @@ class SelectFilesWidget(MWB, QWidget):
         dialog = QFileDialog()
         dialog.setWindowTitle("Choose files")
         dialog.setFileMode(QFileDialog.ExistingFiles)
-        dialog.setNameFilters(self.typeString)
         dialog.setViewMode(QFileDialog.Detail)
         dialog.setDirectory(settingsManager().getLatestFolder())
 

@@ -7,3 +7,4 @@ from frankenscan.controller.modules.readFiles.readFiles import *
 from frankenscan.controller.modules.viewFiles.viewFiles import *
 from frankenscan.controller.modules.modifyFiles.modifyFiles import *
 from frankenscan.controller.modules.machineLearning.machineLearning import *
+from frankenscan.controller.modules.values.createValues import *

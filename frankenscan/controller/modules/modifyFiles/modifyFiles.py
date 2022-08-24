@@ -61,7 +61,8 @@ class Rescale_Image_Files(rc.Node):
     title = 'Rescale image files'
 
     init_inputs = [
-        rc.NodeInputBP('Image data', type_='data')
+        rc.NodeInputBP('Image data', type_='data'),
+        rc.NodeInputBP('Output size', type_='data')
     ]
 
     init_outputs = [
@@ -76,7 +77,7 @@ class Rescale_Image_Files(rc.Node):
 
     def update_event(self, inp=-1):
 
-        if self.hasRun == False and self.input(0)!=None:
+        if self.hasRun == False and self.input(0)!=None and self.input(0)!=None:
             print("Rescaling image files")
 
             #Read the files
@@ -84,10 +85,11 @@ class Rescale_Image_Files(rc.Node):
 
             #Get the selected files
             originalImages = self.input(0)
+            size = self.input(1)
 
             for image in originalImages:
                 #Source: https://github.com/MLDawn/MLDawn-Projects/blob/main/Pytorch/Brain-Tumor-Detector/MRI-Brain-Tumor-Detecor.ipynb
-                rescaledImage = cv2.resize(image,(128,128))
+                rescaledImage = cv2.resize(image,(size, size))
                 images.append(rescaledImage)
 
             print("Updating rescale image node outputs")

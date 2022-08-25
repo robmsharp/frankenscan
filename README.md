@@ -8,7 +8,9 @@ FrankenScan is a flow based tool for processing and analysing scan data.
 
 FrankenScan uses the Ryvencore library.
 
-FrankenScan currently only has 6 modules.
+FrankenScan currently only has 18 modules. It supports the workflow of taking 2d images of healthy and tumour patients and training and evaluating a CNN model.
+
+![My Image](readmeImages/confusionmatrix.png)
 
 While the concept behind FrankenScan is based on ScanFlow (University of Melbourne project) the code has been started from scratch and so is not subject to any copyright relating to ScanFlow.
 

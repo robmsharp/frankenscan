@@ -77,7 +77,7 @@ class Rescale_Image_Files(rc.Node):
 
     def update_event(self, inp=-1):
 
-        if self.hasRun == False and self.input(0)!=None and self.input(0)!=None:
+        if self.hasRun == False and self.input(0)!=None and self.input(1)!=None:
             print("Rescaling image files")
 
             #Read the files
@@ -85,13 +85,19 @@ class Rescale_Image_Files(rc.Node):
 
             #Get the selected files
             originalImages = self.input(0)
-            size = self.input(1)
+            mysize = self.input(1)
+            sizeTuple = (mysize, mysize)
 
-            for image in originalImages:
-                #Source: https://github.com/MLDawn/MLDawn-Projects/blob/main/Pytorch/Brain-Tumor-Detector/MRI-Brain-Tumor-Detecor.ipynb
-                rescaledImage = cv2.resize(image,(size, size))
-                images.append(rescaledImage)
+            try:
 
-            print("Updating rescale image node outputs")
-            self.set_output_val(0, images)
-            self.hasRun = True
+                for image in originalImages:
+                    #Source: https://github.com/MLDawn/MLDawn-Projects/blob/main/Pytorch/Brain-Tumor-Detector/MRI-Brain-Tumor-Detecor.ipynb
+                    rescaledImage = cv2.resize(image, sizeTuple)
+                    images.append(rescaledImage)
+
+                print("Updating rescale image node outputs")
+                self.set_output_val(0, images)
+                self.hasRun = True
+
+            except Exception as e:
+                print("An exception occurred rescaling images: {}".format(e))

@@ -84,7 +84,9 @@ class Train_Model(rc.Node):
 
     init_inputs = [
         rc.NodeInputBP('Untrained model', type_='data'),
-        rc.NodeInputBP('Dataloader', type_='data')
+        rc.NodeInputBP('Dataloader', type_='data'),
+        rc.NodeInputBP('Epochs', type_='data'),
+        rc.NodeInputBP('Batch size', type_='data')
     ]
 
     init_outputs = [
@@ -99,7 +101,7 @@ class Train_Model(rc.Node):
 
     def update_event(self, inp=-1):
 
-        if self.hasRun == False and self.input(0)!=None and self.input(1)!=None:
+        if self.hasRun == False and self.input(0)!=None and self.input(1)!=None and self.input(2)!=None and self.input(3)!=None:
             print("Training model")
 
             if torch.cuda.is_available():
@@ -108,19 +110,24 @@ class Train_Model(rc.Node):
             else:
                 device = torch.device("cpu")
 
-            model = input(0).to(device)
 
-            data = input(1)
+            model = self.input(0).to(device)
+
+
+            data = self.input(1)
 
             eta = 0.0001
-            EPOCH = 400
+            EPOCH = self.input(2)
             optimizer = torch.optim.Adam(model.parameters(), lr=eta)
-            dataloader = DataLoader(data, batch_size=32, shuffle=True)
+            dataloader = DataLoader(data, batch_size=self.input(3), shuffle=True)
             model.train()
+
 
             for epoch in range(1, EPOCH):
                 losses = []
                 for D in dataloader:
+
+
                     optimizer.zero_grad()
                     data = D['image'].to(device)
                     label = D['label'].to(device)
@@ -139,9 +146,9 @@ class Train_Model(rc.Node):
             self.hasRun = True
 
 class Test_Model(rc.Node):
-    """Trains the model on the data and outputs the trained model"""
+    """Tests the model on the data and outputs the trained model"""
 
-    title = 'Train model'
+    title = 'Tests model'
 
     init_inputs = [
         rc.NodeInputBP('Trained model', type_='data'),
@@ -189,13 +196,13 @@ class Test_Model(rc.Node):
             y_true = np.concatenate( y_true, axis=0 ).squeeze()
 
             threshold=0.50
-            minimum=0
-            maximum = 1.0
+            minimum= 0
+            maximum = 1
             predicted = np.array(list(outputs))
             predicted[predicted >= threshold] = maximum
             predicted[predicted < threshold] = minimum
 
-            self.set_output_val(0, outputs)
+            self.set_output_val(0, predicted)
             self.set_output_val(1, y_true)
             self.hasRun = True
 
@@ -221,10 +228,22 @@ class Evaluate_Accuracy(rc.Node):
 
     def update_event(self, inp=-1):
 
-        if self.hasRun == False and self.input(0)!=None and self.input(1)!=None:
+        #This code is used because checking numpy array == None is ambiguous
+
+        a= False
+        b= False
+
+        if type(self.input(0)) is np.ndarray:
+            a = True
+        if type(self.input(1)) is np.ndarray:
+            b = True
+
+        if self.hasRun == False and a==True and b==True:
+
             y_true = self.input(1)
             predicted = self.input(0)
             answer = accuracy_score(y_true, predicted)
+            print(answer)
             self.set_output_val(0, answer)
             self.hasRun = True
 
@@ -283,10 +302,10 @@ class Dummy_Data_Loader(rc.Node):
 class CNN(rc.Node):
     """Loads data and creates labels"""
 
-    title = 'Creates model for convolutional neural network'
+    title = 'Creates CNN model'
 
     init_outputs = [
-        rc.NodeOutputBP('Data loader', type_='data')
+        rc.NodeOutputBP('Model', type_='data')
     ]
 
     color = '#000000'
@@ -294,6 +313,10 @@ class CNN(rc.Node):
     def __init__(self, params):
         super().__init__(params)
         self.hasRun = False
+
+    # Get the module to output something when placed
+    def view_place_event(self):
+        self.update()
 
     def update_event(self, inp=-1):
 

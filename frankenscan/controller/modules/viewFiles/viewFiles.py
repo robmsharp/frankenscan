@@ -1,10 +1,12 @@
 import ryvencore_qt as rc
 
+from frankenscan.controller.modules.viewFiles.cMatrixViewer import ConfusionMatrixViewer
 from frankenscan.controller.modules.viewFiles.dataLoaderViewer import DataLoaderViewer
 from frankenscan.controller.modules.viewFiles.headerViewer import HeaderViewer
 from frankenscan.controller.modules.viewFiles.arrayViewer import ArrayViewer
 from frankenscan.controller.modules.viewFiles.imageViewer import ImageViewer
 
+import numpy as np
 
 class View_Confusion_Matrix(rc.Node):
     """Views Confusion Matrix"""
@@ -22,11 +24,23 @@ class View_Confusion_Matrix(rc.Node):
         self.hasRun = False
 
     def update_event(self, inp=-1):
-        if self.hasRun == False and self.input(0)!=None:
-            print("Viewing dataLoader")
-            data = self.input(0)
+
+        #This code is used because checking numpy array == None is ambiguous
+
+        a= False
+        b= False
+
+        if type(self.input(0)) is np.ndarray:
+            a = True
+        if type(self.input(1)) is np.ndarray:
+            b = True
+
+        if self.hasRun == False and a==True and b==True:
+
+            print("Viewing confusion matrix")
+
             try:
-                DataLoaderViewer(self, data)
+                ConfusionMatrixViewer(self, self.input(0), self.input(1))
             except Exception as e:
                 print(e)
             self.run = True

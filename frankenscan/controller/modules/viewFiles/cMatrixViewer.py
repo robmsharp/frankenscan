@@ -32,15 +32,9 @@ class MplCanvas(FigureCanvasQTAgg):
 
 class ConfusionMatrixViewer(QMainWindow):
 
-
-
     def __init__(self, node, y_true, predicted):
 
         super().__init__()
-
-        self.data = data
-        self.index = 0
-        self.max = len(self.data)
 
         self.node = node
         #Trick to avoid window closing
@@ -52,10 +46,8 @@ class ConfusionMatrixViewer(QMainWindow):
 
         cm = MplCanvas(y_true, predicted)
 
-        self.layout.addWidget(self.console)
+        self.layout.addWidget(cm)
         self.setCentralWidget(container)
-
-        self.updateConsole()
 
         self.setWindowTitle("Confusion Matrix viewer")
 

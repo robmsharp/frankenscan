@@ -37,7 +37,12 @@
       {"Name":"Data_Loader", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
       {"Name":"View_Data_Loader", "Icon":"scanner--arrow.png", "Category": "View"},
       {"Name":"Dummy_Data_Loader", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
-      {"Name":"Create_Int", "Icon":"scanner--arrow.png", "Category": "Values"}
+      {"Name":"Create_Int", "Icon":"scanner--arrow.png", "Category": "Values"},
+      {"Name":"CNN", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
+      {"Name":"Train_Model", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
+      {"Name":"Test_Model", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
+      {"Name":"Evaluate_Accuracy", "Icon":"scanner--arrow.png", "Category": "Machine Learning"},
+      {"Name":"View_Confusion_Matrix", "Icon":"slide-resize-actual.png", "Category": "View"}
 
     ]
 
